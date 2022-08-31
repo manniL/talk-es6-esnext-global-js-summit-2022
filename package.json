@@ -1,0 +1,23 @@
+{
+  "name": "talk-es6-esnext-amazing-js-features",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.35.5",
+    "@slidev/theme-default": "*",
+    "@slidev/theme-seriph": "*"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "^1.1.14",
+    "@iconify-json/mdi": "^1.1.31"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite-plugin-vue-markdown": "0.21.0"
+    }
+  }
+}
