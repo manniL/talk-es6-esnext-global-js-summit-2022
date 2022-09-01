@@ -1,7 +1,11 @@
 <template>
-  <div class="slidev-layout intro">
-    <div class="my-auto">
+  <Default class="intro">
+    <div class="text-center">
       <slot />
     </div>
-  </div>
+  </Default>
 </template>
+
+<script setup lang="ts">
+import Default from '../layouts/default.vue'
+</script>
