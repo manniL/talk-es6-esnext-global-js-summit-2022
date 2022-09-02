@@ -151,6 +151,18 @@ CLA - Contributors License Agreement for intelectual property rights and stuff
 
 ---
 
+# Release of the new standard revisions
+
+<VClicks>
+
+* The ECMAScript Standard is released each year (since 2015)
+* Browsers are usually way quicker regarding implementation
+* They usually implement ES.Next, so at least all Stage 4 features
+
+</VClicks>
+
+---
+
 * ES?: Tagged template literals
 * ES?: `padStart` -> leftpad
 * ES?: Modules
