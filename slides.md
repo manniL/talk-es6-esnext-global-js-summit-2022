@@ -67,6 +67,11 @@ layout: intro
 
 ---
 
+
+<img src="/tc39-github.png" alt="TC39 GitHub proposals repository" class="h-110 mx-auto">
+
+---
+
 # Stage 0 - Strawperson 
 
 
@@ -82,6 +87,7 @@ layout: intro
 <!--
 
 CLA - Contributors License Agreement for intelectual property rights and stuff
+Can be on any repository
 
 -->
 
@@ -121,6 +127,12 @@ CLA - Contributors License Agreement for intelectual property rights and stuff
 * does not need a spec text **yet**
 
 </div>
+
+<!--
+
+Lives in the tc39 org repo from now on
+
+-->
 
 ---
 
