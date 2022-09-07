@@ -193,36 +193,249 @@ Lives in the tc39 org repo from now on
 
 # Features
 
-* ES6: Destructuring
-* ES11: Optional Chaining & Nullish Coalescing
-* ES6: Arrow functions
-* ES?: .apply .call .bind
-* ES6: Symbol
-* ES6: Template Literals + tagged literals
-* ES?: Array methods + Smooshgate
+* Impossible to highlight all features
+* Focus on "must haves" that aren't obvious
+* Seen them missing during reviews often
+
+
+<!--
+
+- missing in various projects
+
+-->
+
 ---
 
-# Candidates
+# Destructuring (ES6)
 
-* ES?: Array-like object access
-* ES?: Tagged template literals
-* ES?: `padStart` -> leftpad
-* ES?: Modules
-* ES6: Destructuring
-* ES6: Template Literals + tagged literals
-* ES?: (many releases) - Array methods!
-* ES6: Arrow functions
-* ES?: .apply .call .bind
-* ES11: Optional Chaining & Nullish Coalescing
-* ES6: Symbol
-* ES6: Proxy
-* ES8: async/await
-* ES6/ES9: Rest/Spread
-* ES10: Smooshgate + Array.flat & Array.flatMap
-* ES11: globalThis
-* ES12: Numeric separators
-* ES13: Array.at() / String.at() 
-* ES14: Array.findLast / Array.findLastIndex
-* Proposal: Pipeline Operator
-* Proposal: Record & Tuples
-* Proposal: Temporal
+```js
+// Some data from an API or transformation
+const data = ['first', 'second', 'third']
+
+// Get the first and second entry
+// Create corresponding variables `first` and `second`
+
+// ???
+```
+
+---
+
+# Array destructuring (ES6)
+
+```js{1-2|1-5|all}
+// Some data from an API or transformation
+const data = ['first', 'second', 'third', 'fourth']
+
+// Get the first and second entry
+// Create corresponding variables `first` and `second`
+
+const first = data[0]
+const second = data[1]
+```
+
+<VClicks>
+
+* Naive solution works fine
+* But there is a more descriptive way
+
+</VClicks>
+
+
+---
+
+# Array destructuring (ES6)
+```js{1-5|7|all}
+// Some data from an API or transformation
+const data = ['first', 'second', 'third', 'fourth']
+
+// Get the first and second entry
+// Create corresponding variables `first` and `second`
+
+const [first, second] = data
+```
+
+<VClicks>
+
+* This syntax is called **array destructuring**
+* It allows us to "unpack" arrays into variables
+* Can be used with other language goodies!
+
+</VClicks>
+
+---
+
+# Array destructuring (ES6)
+
+```js{1|1-4|1,6-7|1,9-10|all}
+const data = ['first', 'second', 'third', 'fourth']
+
+// Normal destructuring
+const [first, second] = data
+
+// Skipping values
+const [ , , third] = data
+
+// Use default values as fallback
+const [firstWithDefault = 'f'] = data
+```
+
+---
+
+
+# The rest/spread operator I (ES6)
+
+```js{1-6|all}
+// Some data from an API or transformation
+const data = ['first', 'second', 'third', 'fourth']
+
+// Get the first and second entry
+// Create corresponding variables `first` and `second`
+// Save the rest of the array in another variable `others`
+
+const [first, second] = data
+const others = data.slice(2)
+```
+
+---
+
+# The rest/spread operator I (ES6)
+
+```js{2,8}
+// Some data from an API or transformation
+const data = ['first', 'second', 'third', 'fourth']
+
+// Get the first and second entry
+// Create corresponding variables `first` and `second`
+// Save the rest of the array in another variable `others`
+
+const [first, second, ...others] = data
+```
+
+<VClicks>
+
+* `...` is called the **rest/spread operator**
+* In this case we use the rest functionality
+* It will contain an array with the leftover elements
+* Must be at the end of the declaration (if used)
+* `const [...rest, last] = [1, 2, 3]` is not possible
+
+</VClicks>
+
+---
+
+# Object destructuring (ES6)
+
+Destructuring assignments also work for objects!
+
+<Code v-click="1">
+
+```js{1-7|1-10|all} {at:1}
+// Result of e.g. an API call
+const result = {
+  id: 42,
+  title: 'Developer Dice',
+  price: 1337,
+  description: 'Lorem Ipsum...'
+}
+
+// Retrieve title and description from the result
+// Store them in variables named alike
+
+const description = result.description
+const title = result.title
+```
+
+</Code>
+
+---
+
+# Object destructuring (ES6)
+
+Destructuring assignments also work for objects!
+
+<Code>
+
+```js{2-7,12}
+// Result of e.g. an API call
+const result = {
+  id: 42,
+  title: 'Developer Dice',
+  price: 1337,
+  description: 'Lorem Ipsum...'
+}
+
+// Retrieve title and description from the result
+// Store them in variables named alike
+
+const { description, title } = result
+```
+
+</Code>
+
+<VClicks>
+
+* Contrary to arrays, the order of attributes does not matter due to naming
+* **Object destructuring** can be used with all language goodies as well
+
+</VClicks>
+
+---
+
+# Object destructuring (ES6)
+
+```js{1-2|1-2,5-6|1-2,8-9|1-2,11-12|1,3,14-15|1,3,14,16|all}
+// Result of e.g. an API call
+const result = { id: 42, title: 'Developer Dice', price: 1337, description: 'Lorem Ipsum...' }
+const nestedResult = { id: 23, sizes: { height: 187, width: 69 } }
+
+// Classic object destructuring
+const { description, title } = result
+
+// Differently named variables
+const { id: itemId } = result
+
+// Default values
+const { id: itemIdWithDefault = -1, quantity = 1 } = result
+
+// Nested destructuring
+const { sizes: { width } } = nestedResult
+const { sizes: { height: itemHeight = -1 } } = nestedResult
+```
+
+---
+
+# The rest/spread operator I (ES6)
+
+*
+
+---
+
+
+# Optional Chaining & Nullish Coalescing (ES11)
+
+---
+
+# Arrow functions (ES6)
+
+---
+
+# .apply .call .bind (ES5?)
+
+---
+
+# Symbol (ES6)
+
+---
+
+# Template Literals (ES6)
+
+---
+
+# Array methods + Smooshgate
+
+
+---
+
+# Outro
+
+TODO
