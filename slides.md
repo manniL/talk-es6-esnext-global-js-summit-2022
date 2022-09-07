@@ -8,12 +8,6 @@ highlighter: shiki
 lineNumbers: true
 ---
 
-## Catcher (PLAYED)
-Oh, so you are a JavaScript (or TypeScript) developer?
-Name every feature!
-
----
-
 <img src="https://i.giphy.com/media/oSYflamt3IEjm/giphy.webp" class="w-screen h-screen absolute top-0 left-0">
 
 <logos-javascript class="absolute text-10xl opacity-75 top-50 left-100"/>
@@ -40,7 +34,7 @@ layout: intro
 
 ---
 
-# JavaScript eats the world
+# JavaScript is everywhere
 
 <VClicks>
 
@@ -51,6 +45,10 @@ layout: intro
 * On the edge (V8 isolates, rarely Node.js itself)
 
 </VClicks>
+
+<blockquote v-click class="mt-8 text-8xl!">
+    Any application that can be written in JavaScript, will eventually be written in JavaScript. —Jeff Attwood
+</blockquote>
 
 ---
 
@@ -71,12 +69,13 @@ layout: intro
 
 # Stage 0 - Strawperson 
 
+
 <VClicks>
 
 * Any discussion, idea or sketch of a proposal that has not been submitted as a "formal" proposal
 * Submitted either by a delegate of the TC39 committee or from non-delegates who signed the CLA
 * No formal criteria
-* "Just input"
+* "Just input" <mdi-thought-bubble class="text-blue-200" />
 
 </VClicks>
 
@@ -90,32 +89,49 @@ CLA - Contributors License Agreement for intelectual property rights and stuff
 
 # Stage 1 - Proposal
 
-<VClicks>
+<mdi-crown v-click="1" class="absolute left-48 text-2xl transform rotate-25 animate-pulse text-yellow-400" />
+
+<Grid class="mt-8">
+<div>
+<VClicks at="1">
 
 * has a *Champion*, that...
-  * ...is the author or editor of the propsal
-  * ...is responsible for the evolution of it through the different stages
-  * ...is usually presenting the proposal in TC39 meetings
-  * ...is a *member of the TC39 committee*
-* does not need a spec text yet
-* is more mature and also highlights...
-  * ...implementation detail
-  * ...high level API
-  * ...possible other proposals
-  * ...shortcomings and issues
+* ...is the author or editor of the propsal
+* ...is responsible for the evolution of it through the different stages
+* ...is usually presenting the proposal in TC39 meetings
+* ...is a *member of the TC39 committee*
 
 </VClicks>
+</div>
+<div>
+<VClicks>
+
+* is more mature and also highlights...
+* ...implementation detail
+* ...high level API
+* ...possible other proposals
+* ...shortcomings and issues
+
+</VClicks>
+</div>
+</Grid>
+
+<div v-click class="flex justify-center items-center mt-8">
+
+* does not need a spec text **yet**
+
+</div>
 
 ---
 
 # Stage 2 - Draft
 
-<VClicks>
+<VClicks class="mt-8">
 
 * Contains everything from Stage 1
-* Also has specification text now with major points covered
+* Has spec text that covers major points <mdi-text class="text-gray-400" />
 * Strong commitment for proposal + feature
-  * will likely be developed and added to the standard one day
+  * will likely be added to the standard in the future
 
 </VClicks>
 
@@ -123,16 +139,16 @@ CLA - Contributors License Agreement for intelectual property rights and stuff
 
 # Stage 3 - Candidate
 
-<VClicks>
+<VClicks class="mt-8">
 
 * Contains everything from Stage 2
 * Has full spec text now
   * Appointed reviewers and all ECMAScript editors have signed off the spec text
-* The suggested feature is "complete"
+* The suggested feature is "complete" <mdi-check class="text-green-500 opacity-75"/>
   * No more work to do without experience of usage, implementation and external feedback
   * No changes regarding functionality anymore
-* Commonly, implemented via transpiler (Babel) or some browsers already
-* Also, TS Support is usual for Stage 3 features
+* Commonly, implemented via transpiler (Babel) or in some browsers already
+* <logos-typescript-icon /> support aimed for Stage 3 features
 
 </VClicks>
 
@@ -140,12 +156,12 @@ CLA - Contributors License Agreement for intelectual property rights and stuff
 
 # Stage 4 - Finished
 
-<VClicks>
+<VClicks class="mt-8">
 
 * Contains everything from Stage 3
 * Acceptance tests written for the feature
 * Experience thanks to previously shipped implementations
-* Will be added to the next revision of the ES standard
+* Will be added to the next revision of the ES standard <mdi-check-decagram class="text-green-500"/>
 
 </VClicks>
 
@@ -155,27 +171,43 @@ CLA - Contributors License Agreement for intelectual property rights and stuff
 
 <VClicks>
 
-* The ECMAScript Standard is released each year (since 2015)
+* ECMAScript Standard is released each year (since 2015)
 * Browsers are usually way quicker regarding implementation
-* They usually implement ES.Next, so at least all Stage 4 features
+* Typically implement ES.Next = all new Stage 4 features
 
 </VClicks>
 
 ---
 
+# Features
+
+* ES6: Destructuring
+* ES11: Optional Chaining & Nullish Coalescing
+* ES6: Arrow functions
+* ES?: .apply .call .bind
+* ES6: Symbol
+* ES6: Template Literals + tagged literals
+* ES?: Array methods + Smooshgate
+---
+
+# Candidates
+
+* ES?: Array-like object access
 * ES?: Tagged template literals
 * ES?: `padStart` -> leftpad
 * ES?: Modules
 * ES6: Destructuring
+* ES6: Template Literals + tagged literals
+* ES?: (many releases) - Array methods!
 * ES6: Arrow functions
-* ES6: Template Literals
-* ES6: Proxy
+* ES?: .apply .call .bind
+* ES11: Optional Chaining & Nullish Coalescing
 * ES6: Symbol
+* ES6: Proxy
 * ES8: async/await
 * ES6/ES9: Rest/Spread
 * ES10: Smooshgate + Array.flat & Array.flatMap
 * ES11: globalThis
-* ES11: Optional Chaining & Nullish Coalescing
 * ES12: Numeric separators
 * ES13: Array.at() / String.at() 
 * ES14: Array.findLast / Array.findLastIndex
