@@ -404,9 +404,27 @@ const { sizes: { height: itemHeight = -1 } } = nestedResult
 
 ---
 
-# The rest/spread operator I (ES6)
+# The rest/spread operator II (ES6)
 
-*
+<VClicks>
+
+* We already took a look at the `...` operator when talking about arrays
+* But it also works for objects
+* It can come in very handy!
+
+</VClicks>
+
+<Code v-click>
+
+```js{1|1-4|all}
+const person = { name: 'Niki', color: '#ff0', hasPet: true, password: '*******' }
+
+const { password: _, ...personWithoutPassword } = person
+console.log(personWithoutPassword)
+// { name: 'Niki', color: '#ff0', hasPet: true }
+```
+
+</Code>
 
 ---
 
