@@ -13,13 +13,12 @@ lineNumbers: true
 <logos-javascript class="absolute text-10xl opacity-75 top-50 left-100"/>
 
 <!--
-
 * JavaScript is constantly evolving
 * Introducing new syntax and features regularly
 * But how is the process of adding new functionality to the language?
-* And which features are easily overlooked but can be very helpful?
-
+* And which featureso are easily overlooked but can be very helpful?
 -->
+
 ---
 layout: intro
 ---
@@ -414,9 +413,9 @@ const { sizes: { height: itemHeight = -1 } } = nestedResult
 
 </VClicks>
 
-<Code v-click>
+<Code v-click="4">
 
-```js{1|1-4|all}
+```js{1|1-4|all} {at:4}
 const person = { name: 'Niki', color: '#ff0', hasPet: true, password: '*******' }
 
 const { password: _, ...personWithoutPassword } = person
@@ -428,8 +427,146 @@ console.log(personWithoutPassword)
 
 ---
 
+# Nullish Coalescing Operator (ES11)
+
+<Code v-click="1">
+
+```js{1-2|all} {at:1}
+const result = { name: 'Bratwurst', type: 'food', description: 'Lorem Ipsum' }
+const text = description || 'Default description'
+console.log(text) // Lorem Ipsum
+```
+
+</Code>
+
+---
+
+# Nullish Coalescing Operator (ES11)
+
+```js{1,3}
+const result = { name: 'Bratwurst', type: 'food', /*                      */ }
+const text = description || 'Default description'
+console.log(text) // 'Default description'
+```
+
+---
+
+# Nullish Coalescing Operator (ES11)
+
+```js{1,3}
+const result = { name: 'Bratwurst', type: 'food', description: ''            }
+const text = description || 'Default description'
+console.log(text) // 'Default description'
+```
+
+<Code v-click="1">
+
+```js{1|2|all} {at:1}
+console.log(0 || 42) // 42
+console.log('' || 'Text') // Text
+```
+
+</Code>
+
+<VClicks class="my-8">
+
+* Logical operators treat falsy values all the same, not only `null` and `undefined`
+* Thus, a new operator was introduced to only handle *nullish* values
+* The **nullish coalescing operator**, written as `??`
+* `a ?? b` translates to `(a !== null && a !== undefined) ? a : b` 
+
+</VClicks>
+
+
+<Code v-click="8">
+
+```js{1|2|all} {at:8}
+console.log(0 ?? 42) // 0
+console.log('' ?? 'Text') // ''
+```
+
+</Code>
+
+---
+
+# Optional Chaining Operator (ES11)
+
+<VClicks>
+
+* Dealing with *nested* and *optional* values
+* Typical for API responses
+</VClicks>
+
+<Code v-click>
+
+```js
+const myApiFn = () => ({ user: { name: 'Peter', id: 3 } }) // Imagine some API call
+const result = myApiFn()
+const petName = result && result.user && result.user.pet && result.user.pet.name
+```
+
+</Code>
+
+<VClicks>
+
+* Verbose and not descriptive unless knowing short-circuiting behavior
+* Instead we can utilize the **optional chaining operator** 
+
+</VClicks>
+
+
+<Code v-click>
+
+```js
+const myApiFn = () => ({ user: { name: 'Peter', id: 3 } }) // Imagine some API call
+const result = myApiFn()
+const petName = result?.user?.pet?.name
+```
+
+</Code>
+
+
+---
+
+# Optional Chaining Operator (ES11)
+
+```js
+const myApiFn = () => ({ user: { name: 'Peter', id: 3 } }) // Imagine some API call
+const result = myApiFn()
+const petName = result?.user?.pet?.name
+```
+
+<VClicks>
+
+* JavaScript will implictly check if the value before the `?.` is nullish
+  * Is nullish? => return `undefined`
+  * Is not nullish? => continue
+* Can be chained as shown
+* Is more descriptive
+* Works not only for objects!
+
+</VClicks>
+
+<Code v-click="5">
+
+```js {1|2|all} {at:5}
+const withMethodsToo = window.doesNotExist?.()
+const andWithArrayAccessToo = window?.['nope!']
+```
+
+</Code>
+
+---
 
 # Optional Chaining & Nullish Coalescing (ES11)
+
+<VClicks>
+
+* Both operators are relatively new (ES11 / ES2020)
+* Ensure that they are transpiled for legacy browsers
+  * ...if you have to support them 👀
+
+</VClicks>
 
 ---
 
