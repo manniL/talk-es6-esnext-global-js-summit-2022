@@ -31,6 +31,35 @@ layout: intro
 
 ### Geekle JavaScript Global Summit’22
 
+
+---
+layout: two-cols
+heading: About me
+---
+
+<template v-slot:default>
+<div class="flex flex-col justify-center items-center h-full">
+<img
+  class="w-75 rounded-full"
+  src="https://lichter.io/img/me@2x.webp"
+  />
+  <h2 class="mt-4">Alexander Lichter</h2>
+</div>
+</template>
+
+<template v-slot:right>
+<VClicks class="space-y-2 mt-10 text-xl h-full">
+
+* <mdi-account-check class="text-green-100" /> Web Development Consultant
+* <mdi-microphone /> Speaker & Instructor
+* <logos-nuxt-icon /> Nuxt.js Maintainer
+* <mdi-twitter class="text-blue-400" /> @TheAlexLichter
+* <mdi-web /> [https://lichter.io](https://lichter.io)
+* <mdi-github /> [manniL](https://github.com/manniL)
+
+</VClicks>
+</template>
+
 ---
 
 # JavaScript is everywhere
@@ -792,6 +821,7 @@ const id = Symbol.for('id')
 const sameSymbol = Symbol.for('id')
 
 console.log(id === sameSymbol) // true
+```
 
 </Code>
 
@@ -799,10 +829,209 @@ console.log(id === sameSymbol) // true
 
 # Template Literals (ES6)
 
-* Strings vs. template literals
-* Interpolation
-* Multiline
-* Tagged literals
+```js
+const getFullName = (name) => {
+  const someCondition = Math.random() > 0.5
+  const prefix = someCondition ? 'Duke' : 'King'
+
+  const anotherCondition = Math.random() > 0.5
+  const suffix = anotherCondition ? 'Cornwall' : 'the World'
+
+  return prefix + ' ' + name + ' of' + suffix
+}
+```
+
+<VClicks>
+
+* When composing strings, it can happen quickly to forget a delimiter, space or similar
+* Also, expressions become harder to read at some point
+
+</VClicks>
+
+---
+
+# Template Literals (ES6)
+
+```js{8}
+const getFullName = (name) => {
+  const someCondition = Math.random() > 0.5
+  const prefix = someCondition ? 'Duke' : 'King'
+
+  const anotherCondition = Math.random() > 0.5
+  const suffix = anotherCondition ? 'Cornwall' : 'the World'
+
+  return prefix + ' ' + name + ' of' + suffix
+}
+```
+
+* When composing strings, it can happen quickly to forget a delimiter, space or similar
+* Also, expressions become harder to read at some point
+
+---
+
+# Template Literals (ES6)
+
+```js{8|all}
+const getFullName = (name) => {
+  const someCondition = Math.random() > 0.5
+  const prefix = someCondition ? 'Duke' : 'King'
+
+  const anotherCondition = Math.random() > 0.5
+  const suffix = anotherCondition ? 'Cornwall' : 'the World'
+
+  return prefix + ' ' + name + ' of ' + suffix
+}
+```
+
+* When composing strings, it can happen quickly to forget a delimiter, space or similar
+* Also, expressions become harder to read at some point
+
+<VClicks>
+
+* But luckily, **template literals** come to the rescue
+
+</VClicks>
+
+---
+
+# Template Literals (ES6)
+
+```js{8|all}
+const getFullName = (name) => {
+  const someCondition = Math.random() > 0.5
+  const prefix = someCondition ? 'Duke' : 'King'
+
+  const anotherCondition = Math.random() > 0.5
+  const suffix = anotherCondition ? 'Cornwall' : 'the World'
+
+  return `${prefix} ${name} ${suffix}`
+}
+```
+
+<VClicks>
+
+* Strings can be *interpolated* via `${}` syntax
+* Can be JS expressions, not only variables (e.g. `${1 + 3}`)
+* Templates can be nested (use with caution though!)
+
+</VClicks>
+
+<Code v-click>
+
+```js
+const someCondition = Math.random() > 0.5
+const anotherCondition = Math.random() > 0.5
+const classes = `static ${someCondition ? ` icon-${anotherCondition ? 'star' : 'square' }` : ''}` 
+```
+
+</Code>
+
+---
+
+# Template Literals (ES6)
+
+```js
+const email = 'To whom it may concerns,\n\nSome more content here that is multiline'
+const multilineEmail = `
+To whom it may concerns,
+
+Some more content here that is actually multiline!
+`.trim()
+```
+
+<VClicks>
+
+* Also, template literals have true multiline support!
+* And there is also a special way of using them...
+* ...called **tagged template literals**
+
+</VClicks>
+
+---
+clicks: 2
+---
+
+# Tagged Template Literals (ES6)
+
+<VClicks>
+
+* You might know them from e.g. `styled-components` or `graphql-tag` already!
+* Also, jest supports them as well!
+
+</VClicks>
+
+<Code v-click="1">
+
+```js
+styled.button`
+    background-color: black;
+    color: red;
+`
+```
+
+</Code>
+
+<Code v-click="2">
+
+```js
+test.each`
+ x       | y        | expected
+ ${42}   | ${7}     | ${49}
+ ${-10}  | ${11}    | ${1}
+ ${0}    | ${-0}    | ${-0}
+`("returns $expected when adding $x and $y", ({ x, y, expected }) => {
+  expect(sum(x, y)).toBe(expected)
+})
+```
+
+</Code>
+
+---
+
+# Tagged Template Literals (ES6)
+
+```js{1-3|1-3,10|1-3,5,8-10|1-3,5-6,8-10|all}
+const greeting = "Hey"
+const event = 'JavaScript Global Summit'
+const year = 2022
+
+function transform(strings, ...expressions) {
+  console.log(strings); // [ "", " all from ", " ", "!" ]
+  console.log(expressions); // [ "Hey", "JavaScript Global Summit", 2022 ]
+}
+
+transform`${greeting} all from ${event} ${year}!`
+```
+
+<VClicks>
+
+* Tag function receives the template as arguments:
+  * Array of static strings as first argument
+  * Expressions as arguments after
+* Rest/Spread operator used, to capture all arguments after `strings` in an array
+
+</VClicks>
+
+---
+
+# Tagged Template Literals (ES6)
+
+```js
+const greeting = "Hey"
+const event = 'JavaScript Global Summit'
+const year = 2022
+
+function transform(strings, ...expressions) {
+  let result = ''
+  strings.forEach((str, i) => {
+    result += str + (expressions[i] ?? '')
+  })
+  return result
+}
+
+transform`${greeting} all from ${event} ${year}!`
+```
+
 
 ---
 
