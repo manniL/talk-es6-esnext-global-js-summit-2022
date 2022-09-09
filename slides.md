@@ -31,7 +31,6 @@ layout: intro
 
 ### Geekle JavaScript Global Summit’22
 
-
 ---
 layout: two-cols
 heading: About me
@@ -50,7 +49,7 @@ heading: About me
 <template v-slot:right>
 <VClicks class="space-y-2 mt-10 text-xl h-full">
 
-* <mdi-account-check class="text-green-100" /> Web Development Consultant
+* <mdi-account-check class="text-green-100" /> **Web Development Consultant**
 * <mdi-microphone /> Speaker & Instructor
 * <logos-nuxt-icon /> Nuxt.js Maintainer
 * <mdi-twitter class="text-blue-400" /> @TheAlexLichter
@@ -1024,14 +1023,53 @@ const year = 2022
 function transform(strings, ...expressions) {
   let result = ''
   strings.forEach((str, i) => {
-    result += str + (expressions[i] ?? '')
+    const expression = expressions[i]
+    
+    result += str
+    if(expression) {
+      result += expression
+    }
   })
+  
   return result
 }
 
 transform`${greeting} all from ${event} ${year}!`
 ```
 
+---
+
+# Tagged Template Literals (ES6)
+
+```js{all|5,8,13|all}
+const greeting = "Hey"
+const event = 'JavaScript Global Summit'
+const year = 2022
+
+function expressionsToUppercase(strings, ...expressions) {
+  let result = ''
+  strings.forEach((str, i) => {
+    const expression = expressions[i]
+    
+    result += str
+    if(expression) {
+      result += String(expression).toUpperCase()
+    }
+  })
+  
+  return result
+}
+
+expressionsToUppercase`${greeting} all from ${event} ${year}!`
+```
+
+<VClicks>
+
+* You can do whatever you want in the tag function
+* You don't have to return a string either
+* Sky is the limit!
+
+</VClicks>
 
 ---
 
@@ -1050,4 +1088,32 @@ transform`${greeting} all from ${event} ${year}!`
 
 # Outro
 
-TODO
+
+
+---
+layout: two-cols
+heading: Thank you for your attention!
+---
+
+<template v-slot:default>
+<div class="flex flex-col justify-center items-center h-full">
+<img
+  class="w-75 rounded-full"
+  src="https://lichter.io/img/me@2x.webp"
+  />
+  <h2 class="mt-4">Alexander Lichter</h2>
+</div>
+</template>
+
+<template v-slot:right>
+<div class="space-y-2 mt-10 text-xl h-full">
+
+* <mdi-account-check class="text-green-100" /> **Web Development Consultant**
+* <mdi-microphone /> Speaker & Instructor
+* <logos-nuxt-icon /> Nuxt.js Maintainer
+* <mdi-twitter class="text-blue-400" /> @TheAlexLichter
+* <mdi-web /> [https://lichter.io](https://lichter.io)
+* <mdi-github /> [manniL](https://github.com/manniL)
+
+</div>
+</template>
