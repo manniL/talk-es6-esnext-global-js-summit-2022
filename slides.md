@@ -572,22 +572,250 @@ const andWithArrayAccessToo = window?.['nope!']
 
 # Arrow functions (ES6)
 
+<VClicks>
+
+* New way of declaring functions has been introduced in ES6
+* More compact but also *semanticall different*
+* It is called **arrow function** expression
+
+</VClicks>
+
+<Code v-click="4">
+
+```js{1-4|1-7|all} {at:4}
+// Anonymous function
+(function(a, b, c) { 
+  return a + b + c
+});
+
+// Arrow function
+(a, b, c) => { return a + b + c };
+
+// Shorthand for one-liner
+(a, b, c) => a + b + c;
+```
+
+</Code>
+
+
 ---
 
-# .apply .call .bind (ES5?)
+# Arrow functions (ES6)
+
+Some more examples
+
+```js{1-4|1-9|all}
+// Classic function
+function timesTwo(a) { 
+  return a * 2
+});
+
+// Arrow function as variable
+// Yes, you can leave out parentheses around the argument...
+// ...if it is just one 
+const aTimesTwo = a => a * 2
+
+// When using shorthand with objects, parentheses are needed
+const objectFactory = () => ({ data: null })
+```
 
 ---
 
-# Symbol (ES6)
+# Arrow functions - Differences (ES6)
+
+As mentioned before, arrow functions behave differently in some situations:
+
+<VClicks>
+
+* They cannot be used as `class` constructors
+* It is not possible to use `yield` within them (generator fn)
+* They don't create a new scope...
+* ...thus, you cannot use `call`, `apply` and `bind` with them
+* ...and they use the `this` of scope they were defined in (no own `this`)
+
+</VClicks>
+
+---
+
+# Arrow functions - `this` (ES6)
+
+```js
+const student = {
+  name: 'Maria',
+  enjoyBreak() {
+    console.log(this.name + ' is enjoying their break!')
+    setTimeout(function() {
+      console.log(this.name + ' finished their break!')
+    }, 1000)
+  }
+}
+
+student.enjoyBreak()
+```
+
+<p v-click class="text-4xl text-center pt-8">What will be logged?</p>
+
+<VClicks>
+
+* Maria is enjoying their break!
+*  finished their break!
+
+</VClicks>
+
+---
+
+# Arrow functions - `this` (ES6)
+
+```js
+const student = {
+  name: 'Maria',
+  enjoyBreak() {
+    console.log(this.name + ' is enjoying their break!')
+    setTimeout(function() {
+      console.log(this.name + ' finished their break!')
+    }, 1000)
+  }
+}
+
+student.enjoyBreak()
+```
+
+<VClicks>
+
+* The `this` in line `6` is undefined
+* Because a `function` creates an own scope
+* How to solve the issue?
+* Arrow fn to the rescue!
+
+</VClicks>
+
+---
+
+# Arrow functions - `this` (ES6)
+
+```js
+const student = {
+  name: 'Maria',
+  enjoyBreak() {
+    console.log(this.name + ' is enjoying their break!')
+    setTimeout(() => {
+      console.log(this.name + ' finished their break!')
+    }, 1000)
+  }
+}
+
+student.enjoyBreak()
+```
+
+<VClicks>
+
+* Maria is enjoying their break!
+* Maria finished their break!
+
+</VClicks>
+
+---
+
+# Data Types
+
+JavaScript has a number of data types...
+
+<VClicks>
+
+* number
+* string
+* undefined
+* bigint
+* boolean
+* null (with typeof caveat)
+* object (non-primitive)
+* **symbol**
+
+</VClicks>
+
+<!--
+
+Who can name all data types in JavaScript?
+
+-->
+
+---
+
+# Symbols (ES6)
+
+When creating an object in JavaScript, there are only two types allowed to be used as key:
+
+<VClicks>
+
+* string (e.g: `{ '1': 1, answer: 42 }`)
+* symbol
+
+</VClicks>
+
+<Code v-click="3">
+
+```js{1-2|4|6|6-9|1-2,7,11|all} {at:3}
+const obj = {}
+obj[42] = 42 // { '42': 42 }
+
+const id = Symbol()
+
+const idWithDescription = Symbol('id')
+const anotherId = Symbol('id')
+
+console.log(idWithDescription === anotherId) // false
+
+obj[anotherId] = 'hidden value'
+console.log(obj) // { '42': 42, Symbol("id"): "hidden value" }
+```
+
+</Code>
+
+---
+
+# Symbols (ES6)
+
+<VClicks>
+
+* Symbols were once thought as "privat fields"
+* Main use case: Collision-free object keys
+* Internals (e.g. iterators) are realized via symbols
+* JavaScript added "actual" private fields to classes
+* Symbols can also "collide" on purpose!
+
+</VClicks>
+
+<Code v-click>
+
+```js
+const id = Symbol.for('id')
+const sameSymbol = Symbol.for('id')
+
+console.log(id === sameSymbol) // true
+
+</Code>
 
 ---
 
 # Template Literals (ES6)
 
+* Strings vs. template literals
+* Interpolation
+* Multiline
+* Tagged literals
+
 ---
 
 # Array methods + Smooshgate
 
+* forEach
+* map
+* filter
+* find / findIndex
+* reduce?
+* some
+* flat / flatMap (+ smooshgate?)
+* at (new)
 
 ---
 
