@@ -68,7 +68,7 @@ heading: About me
 * It can run almost anywhere nowadays
 * In the browser
 * On the PC/server via Node.js
-* Via PaaS/FaaS as e.g. serverless functions
+* As lambda or serverless functions
 * On the edge (V8 isolates, rarely Node.js itself)
 
 </VClicks>
@@ -210,40 +210,26 @@ Lives in the tc39 org repo from now on
 
 <VClicks>
 
-* ECMAScript Standard is released each year (since 2015)
+* ECMAScript Standard is released each year in June
 * Browsers are usually way quicker regarding implementation
 * Typically implement ES.Next = all new Stage 4 features
 
 </VClicks>
 
 ---
+layout: intro
+---
 
 # Features
+
+
+<!--
 
 * Impossible to highlight all features
 * Focus on "must haves" that aren't obvious
 * Seen them missing during reviews often
 
-
-<!--
-
-- missing in various projects
-
 -->
-
----
-
-# Destructuring (ES6)
-
-```js
-// Some data from an API or transformation
-const data = ['first', 'second', 'third']
-
-// Get the first and second entry
-// Create corresponding variables `first` and `second`
-
-// ???
-```
 
 ---
 
@@ -453,6 +439,22 @@ console.log(personWithoutPassword)
 
 </Code>
 
+<Code v-click="7">
+
+```js{1|1-2|1-3|1-4|6|1,6-7|1,6-8|1,6-9|all} {at:7}
+const defaultUser = { name: 'Default', id: -1, role: 'User' }
+const shallowCopyOfDefaultUser = {...defaultUser } 
+console.log(shallowCopyOfDefaultUser)
+// { name: 'Default', id: -1, role: 'User' } 
+
+const userFromApi = { name: 'Roberta', id: 10 } // Again, example API response
+const userWithDefaults = {...defaultUser, ...userFromApi } // Only top-level merge, use `defu` instead
+console.log(userWithDefaults)
+// { name: 'Roberta', id: 10, role: 'User '}
+```
+
+</Code>
+
 ---
 
 # Nullish Coalescing Operator (ES11)
@@ -461,7 +463,7 @@ console.log(personWithoutPassword)
 
 ```js{1-2|all} {at:1}
 const result = { name: 'Bratwurst', type: 'food', description: 'Lorem Ipsum' }
-const text = description || 'Default description'
+const text = result.description || 'Default description'
 console.log(text) // Lorem Ipsum
 ```
 
@@ -471,9 +473,9 @@ console.log(text) // Lorem Ipsum
 
 # Nullish Coalescing Operator (ES11)
 
-```js{1,3}
+```js
 const result = { name: 'Bratwurst', type: 'food', /*                      */ }
-const text = description || 'Default description'
+const text = result.description || 'Default description'
 console.log(text) // 'Default description'
 ```
 
@@ -481,9 +483,19 @@ console.log(text) // 'Default description'
 
 # Nullish Coalescing Operator (ES11)
 
-```js{1,3}
+```js
 const result = { name: 'Bratwurst', type: 'food', description: ''            }
-const text = description || 'Default description'
+const text = result.description || 'Default description'
+console.log(text) // '???'
+```
+
+---
+
+# Nullish Coalescing Operator (ES11)
+
+```js
+const result = { name: 'Bratwurst', type: 'food', description: ''            }
+const text = result.description || 'Default description'
 console.log(text) // 'Default description'
 ```
 
@@ -528,8 +540,7 @@ console.log('' ?? 'Text') // ''
 <Code v-click>
 
 ```js
-const myApiFn = () => ({ user: { name: 'Peter', id: 3 } }) // Imagine some API call
-const result = myApiFn()
+const result = { user: { name: 'Peter', id: 3 } } // Imagine some API call
 const petName = result && result.user && result.user.pet && result.user.pet.name
 ```
 
@@ -546,20 +557,18 @@ const petName = result && result.user && result.user.pet && result.user.pet.name
 <Code v-click>
 
 ```js
-const myApiFn = () => ({ user: { name: 'Peter', id: 3 } }) // Imagine some API call
-const result = myApiFn()
-const petName = result?.user?.pet?.name
+const result = { user: { name: 'Peter', id: 3 } } // Mocked API response
+const petName = result.user?.pet?.name
 ```
 
 </Code>
-
 
 ---
 
 # Optional Chaining Operator (ES11)
 
 ```js
-const myApiFn = () => ({ user: { name: 'Peter', id: 3 } }) // Imagine some API call
+const result = { user: { name: 'Peter', id: 3 } } // Imagine some API call
 const result = myApiFn()
 const petName = result?.user?.pet?.name
 ```
@@ -593,8 +602,18 @@ const andWithArrayAccessToo = window?.['nope!']
 * Both operators are relatively new (ES11 / ES2020)
 * Ensure that they are transpiled for legacy browsers
   * ...if you have to support them 👀
-
+* Do not overuse optional chaining! No `result?.a?.b?.c?.myMethod?.()`
+  * Only use it when the expression before might be nullish!
 </VClicks>
+
+<Code v-click>
+
+```js
+const result = {}
+return result?.data ?? { error: 'Not Found' }
+```
+
+</Code>
 
 ---
 
@@ -603,7 +622,7 @@ const andWithArrayAccessToo = window?.['nope!']
 <VClicks>
 
 * New way of declaring functions has been introduced in ES6
-* More compact but also *semanticall different*
+* More compact but also *semantically different*
 * It is called **arrow function** expression
 
 </VClicks>
@@ -741,6 +760,68 @@ student.enjoyBreak()
 * Maria finished their break!
 
 </VClicks>
+
+---
+
+# Lookout
+
+<VClicks>
+
+* There are way more features to cover...
+* Template literals (see bonus slides)
+* Symbols (see bonus slides)
+* Array functions (`.forEach`, `.filter`, `.map`, `.reduce`, and more...)
+* String padding
+* Proxies
+* async/await
+* globalThis
+* Upcoming additions to the language / upcoming proposals
+* ...
+
+</VClicks>
+
+
+---
+layout: two-cols
+heading: Thank you for your attention!
+---
+
+<template v-slot:default>
+<div class="flex flex-col justify-center items-center h-full">
+<img
+  class="w-75 rounded-full"
+  src="https://lichter.io/img/me@2x.webp"
+  />
+  <h2 class="mt-4">Alexander Lichter</h2>
+</div>
+</template>
+
+<template v-slot:right>
+<div class="space-y-2 mt-10 text-xl h-full">
+
+* <mdi-account-check class="text-green-100" /> **Web Development Consultant**
+* <mdi-microphone /> Speaker & Instructor
+* <logos-nuxt-icon /> Nuxt.js Maintainer
+* <mdi-twitter class="text-blue-400" /> @TheAlexLichter
+* <mdi-web /> [https://lichter.io](https://lichter.io)
+* <mdi-github /> [manniL](https://github.com/manniL)
+
+</div>
+</template>
+
+---
+layout: intro
+---
+
+# Slides / Repo
+
+## [https://lichter.link/js-global-summit-2022](https://lichter.link/js-global-summit-2022)
+
+---
+layout: intro
+---
+
+# Bonus
 
 ---
 
@@ -1063,57 +1144,9 @@ function expressionsToUppercase(strings, ...expressions) {
 expressionsToUppercase`${greeting} all from ${event} ${year}!`
 ```
 
-<VClicks>
+<!-- 
 
 * You can do whatever you want in the tag function
 * You don't have to return a string either
-* Sky is the limit!
 
-</VClicks>
-
----
-
-# Array methods + Smooshgate
-
-* forEach
-* map
-* filter
-* find / findIndex
-* reduce?
-* some
-* flat / flatMap (+ smooshgate?)
-* at (new)
-
----
-
-# Outro
-
-
-
----
-layout: two-cols
-heading: Thank you for your attention!
----
-
-<template v-slot:default>
-<div class="flex flex-col justify-center items-center h-full">
-<img
-  class="w-75 rounded-full"
-  src="https://lichter.io/img/me@2x.webp"
-  />
-  <h2 class="mt-4">Alexander Lichter</h2>
-</div>
-</template>
-
-<template v-slot:right>
-<div class="space-y-2 mt-10 text-xl h-full">
-
-* <mdi-account-check class="text-green-100" /> **Web Development Consultant**
-* <mdi-microphone /> Speaker & Instructor
-* <logos-nuxt-icon /> Nuxt.js Maintainer
-* <mdi-twitter class="text-blue-400" /> @TheAlexLichter
-* <mdi-web /> [https://lichter.io](https://lichter.io)
-* <mdi-github /> [manniL](https://github.com/manniL)
-
-</div>
-</template>
+-->
